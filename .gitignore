@@ -1,0 +1,28 @@
+node_modules/
+dist/
+coverage/
+.turbo/
+*.log
+.DS_Store
+
+.env
+.env.*
+!.env.example
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+crash.log
+
+# Firebase
+.firebase/
+*-debug.log
+
+# Expo
+.expo/
+web-build/
+ios/
+android/
