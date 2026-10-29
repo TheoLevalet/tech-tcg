@@ -1,0 +1,23 @@
+{
+  "name": "@tech-tcg/api",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@tech-tcg/engine": "workspace:*",
+    "@tech-tcg/shared": "workspace:*",
+    "fastify": "5.12.7"
+  },
+  "devDependencies": {
+    "@tech-tcg/config": "workspace:*",
+    "@types/node": "22.20.5",
+    "eslint": "10.13.0",
+    "typescript": "6.0.3",
+    "vitest": "5.0.5"
+  }
+}
