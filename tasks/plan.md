@@ -44,49 +44,55 @@ README (T12)
 ## Liste des tâches
 
 ### Phase 1 : Fondations
+
 - [x] T1 : Racine du workspace pnpm + Turborepo
-- [ ] T2 : Presets partagés `@tech-tcg/config`
+- [x] T2 : Presets partagés `@tech-tcg/config`
 - [ ] T3 : `@tech-tcg/shared` avec `cardSchema` et `healthResponseSchema`
 - [ ] T4 : `@tech-tcg/engine` avec `draw()`
 
 ### Checkpoint 1 : Fondations
+
 - [ ] `pnpm lint && pnpm typecheck && pnpm test && pnpm build` verts
 - [ ] 2e exécution « FULL TURBO »
 - [ ] Revue humaine
 
 ### Phase 2 : Apps (tranches verticales)
+
 - [ ] T5 : API Fastify `GET /health` testée par `inject()`
 - [ ] T6 : API servie par Cloud Functions dans les emulators
 - [ ] T7 : Web Vite + React affichant le statut de l'API
 - [ ] T8 : Mobile Expo utilisant `engine` et `shared`
 
 ### Checkpoint 2 : Apps
+
 - [ ] `pnpm emulators` + `pnpm dev` → page web affiche `ok`
 - [ ] Expo démarre sans erreur
 - [ ] Revue humaine
 
 ### Phase 3 : Infra, CI, docs
+
 - [ ] T9 : Terraform : bucket de state + projet Firebase
 - [ ] T10 : Terraform : Firestore, Auth, Hosting, budget
 - [ ] T11 : CI GitHub Actions
 - [ ] T12 : README
 
 ### Checkpoint final
+
 - [ ] Tous les critères de succès de SPEC.md remplis
 - [ ] CI verte sur la PR d'init
 - [ ] Prêt pour revue
 
 ## Risques et mitigations
 
-| Risque | Impact | Mitigation |
-|---|---|---|
-| Fastify dans `onRequest` : le body est déjà parsé par Functions | Moyen | Passer `req.rawBody` / désactiver le parser JSON de Fastify dans l'adaptateur ; test POST dans T6 |
-| `firebase deploy` ne résout pas `workspace:*` | Haut | Bundle tsup + `package.json` généré (T6), vérifié par `firebase emulators` sur `dist/` |
-| Expo + pnpm (symlinks, Metro) | Moyen | Expo SDK récent gère les installs isolées ; repli `node-linker=hoisted` limité au besoin, à valider en T8 |
-| Expo épingle ses propres versions de React/TS | Moyen | `pnpm.overrides` ou versions alignées sur celles d'Expo pour tout le monorepo |
-| Terraform Firebase nécessite `google-beta` et un billing account | Moyen | Variables `billing_account` / `org_id` ; `plan` uniquement, `apply` sur accord |
-| Firebase Auth via Terraform passe par Identity Platform | Bas | Rester sous 50k MAU (free tier) ; documenté dans le module |
-| Facturation surprise | Haut | Budget + alerte dès T10, `minInstances: 0`, `maxInstances` bas |
+| Risque                                                           | Impact | Mitigation                                                                                                |
+| ---------------------------------------------------------------- | ------ | --------------------------------------------------------------------------------------------------------- |
+| Fastify dans `onRequest` : le body est déjà parsé par Functions  | Moyen  | Passer `req.rawBody` / désactiver le parser JSON de Fastify dans l'adaptateur ; test POST dans T6         |
+| `firebase deploy` ne résout pas `workspace:*`                    | Haut   | Bundle tsup + `package.json` généré (T6), vérifié par `firebase emulators` sur `dist/`                    |
+| Expo + pnpm (symlinks, Metro)                                    | Moyen  | Expo SDK récent gère les installs isolées ; repli `node-linker=hoisted` limité au besoin, à valider en T8 |
+| Expo épingle ses propres versions de React/TS                    | Moyen  | `pnpm.overrides` ou versions alignées sur celles d'Expo pour tout le monorepo                             |
+| Terraform Firebase nécessite `google-beta` et un billing account | Moyen  | Variables `billing_account` / `org_id` ; `plan` uniquement, `apply` sur accord                            |
+| Firebase Auth via Terraform passe par Identity Platform          | Bas    | Rester sous 50k MAU (free tier) ; documenté dans le module                                                |
+| Facturation surprise                                             | Haut   | Budget + alerte dès T10, `minInstances: 0`, `maxInstances` bas                                            |
 
 ## Parallélisation
 
@@ -97,6 +103,7 @@ README (T12)
 ## Questions ouvertes
 
 Reprises de SPEC.md, réponses par défaut appliquées ci-dessus tant que non tranchées :
+
 1. Plan Blaze et montant de l'alerte budget.
 2. Projet Firebase existant ou créé par Terraform (billing account / organisation).
 3. State Terraform GCS ou local.
