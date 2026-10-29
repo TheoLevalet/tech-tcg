@@ -1,4 +1,4 @@
-import { readFile, symlink, writeFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import { defineConfig } from "tsup";
 
 interface Manifest {
@@ -39,7 +39,5 @@ export default defineConfig({
       dependencies,
     };
     await writeFile("dist/package.json", `${JSON.stringify(manifest, null, 2)}\n`);
-    // Résolution locale pour les emulators ; node_modules est ignoré par `firebase deploy`.
-    await symlink("../node_modules", "dist/node_modules");
   },
 });

@@ -19,6 +19,7 @@
   "devDependencies": {
     "@tech-tcg/config": "workspace:*",
     "eslint": "10.13.0",
+    "firebase-functions": "7.4.0",
     "firebase-tools": "15.34.2",
     "prettier": "3.9.10",
     "turbo": "2.11.10",
