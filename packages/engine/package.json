@@ -1,0 +1,24 @@
+{
+  "name": "@tech-tcg/engine",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@tech-tcg/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@tech-tcg/config": "workspace:*",
+    "@vitest/coverage-v8": "5.0.5",
+    "eslint": "10.13.0",
+    "typescript": "6.0.3",
+    "vitest": "5.0.5"
+  }
+}
