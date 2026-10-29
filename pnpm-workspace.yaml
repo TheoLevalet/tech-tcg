@@ -1,3 +1,11 @@
 packages:
   - apps/*
   - packages/*
+minimumReleaseAgeExclude:
+  - firebase-tools@15.34.2
+
+allowBuilds:
+  esbuild: true
+  "@firebase/util": false
+  protobufjs: false
+  re2: false

@@ -4,6 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
     "lint": "eslint .",
     "typecheck": "tsc",
     "test": "vitest run"
@@ -11,12 +13,17 @@
   "dependencies": {
     "@tech-tcg/engine": "workspace:*",
     "@tech-tcg/shared": "workspace:*",
-    "fastify": "5.12.7"
+    "fastify": "5.12.7",
+    "firebase-admin": "14.5.0",
+    "firebase-functions": "7.4.0"
   },
   "devDependencies": {
     "@tech-tcg/config": "workspace:*",
+    "@types/express": "5.0.6",
     "@types/node": "22.20.5",
     "eslint": "10.13.0",
+    "express": "5.3.0",
+    "tsup": "9.0.0",
     "typescript": "6.0.3",
     "vitest": "5.0.5"
   }

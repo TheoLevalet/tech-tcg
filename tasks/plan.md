@@ -59,7 +59,7 @@ README (T12)
 ### Phase 2 : Apps (tranches verticales)
 
 - [x] T5 : API Fastify `GET /health` testée par `inject()`
-- [ ] T6 : API servie par Cloud Functions dans les emulators
+- [x] T6 : API servie par Cloud Functions dans les emulators
 - [ ] T7 : Web Vite + React affichant le statut de l'API
 - [ ] T8 : Mobile Expo utilisant `engine` et `shared`
 
