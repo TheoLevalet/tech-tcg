@@ -60,7 +60,7 @@ README (T12)
 
 - [x] T5 : API Fastify `GET /health` testée par `inject()`
 - [x] T6 : API servie par Cloud Functions dans les emulators
-- [ ] T7 : Web Vite + React affichant le statut de l'API
+- [x] T7 : Web Vite + React affichant le statut de l'API
 - [ ] T8 : Mobile Expo utilisant `engine` et `shared`
 
 ### Checkpoint 2 : Apps
