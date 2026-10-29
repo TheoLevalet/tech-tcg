@@ -36,3 +36,21 @@ variable "state_bucket_location" {
   type        = string
   default     = "EU"
 }
+
+variable "budget_amount" {
+  description = "Montant mensuel du budget, dans la devise du compte de facturation."
+  type        = number
+  default     = 5
+}
+
+variable "budget_currency" {
+  description = "Devise du compte de facturation."
+  type        = string
+  default     = "EUR"
+}
+
+variable "budget_alert_thresholds" {
+  description = "Seuils d'alerte en fraction du budget."
+  type        = list(number)
+  default     = [0.5, 0.9, 1]
+}

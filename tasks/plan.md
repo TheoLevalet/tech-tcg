@@ -72,7 +72,7 @@ README (T12)
 ### Phase 3 : Infra, CI, docs
 
 - [x] T9 : Terraform : bucket de state + projet Firebase
-- [ ] T10 : Terraform : Firestore, Auth, Hosting, budget
+- [x] T10 : Terraform : Firestore, Auth, Hosting, budget
 - [ ] T11 : CI GitHub Actions
 - [ ] T12 : README
 
