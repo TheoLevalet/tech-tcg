@@ -74,7 +74,7 @@ README (T12)
 - [x] T9 : Terraform : bucket de state + projet Firebase
 - [x] T10 : Terraform : Firestore, Auth, Hosting, budget
 - [ ] T11 : CI GitHub Actions
-- [ ] T12 : README
+- [x] T12 : README
 
 ### Checkpoint final
 

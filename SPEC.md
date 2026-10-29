@@ -38,17 +38,17 @@ Règle : les dépendances vont uniquement vers le bas. `engine` et `shared` n'im
 
 | Domaine         | Choix                                                                                           |
 | --------------- | ----------------------------------------------------------------------------------------------- |
-| Package manager | pnpm 10 (workspaces), `packageManager` épinglé dans `package.json`                              |
+| Package manager | pnpm 12 (workspaces), `packageManager` épinglé dans `package.json`                              |
 | Orchestration   | Turborepo 2                                                                                     |
-| Langage         | TypeScript 5.x, `strict: true`, ESM partout                                                     |
-| Front web       | Vite + React 19 + React Router                                                                  |
-| Mobile          | Expo SDK (dernière stable) + Expo Router                                                        |
+| Langage         | TypeScript 6.0 (typescript-eslint ne supporte pas encore la 7), `strict: true`, ESM partout     |
+| Front web       | Vite 8 + React 19.3 + React Router                                                              |
+| Mobile          | Expo SDK 58 (impose la version de React du monorepo) + Expo Router                              |
 | API             | Fastify 5 dans `firebase-functions` v2 `onRequest`                                              |
 | Validation      | Zod                                                                                             |
 | Données         | Firestore (`firebase-admin` côté API, SDK client côté web/mobile)                               |
 | Auth            | Firebase Auth                                                                                   |
-| IaC             | Terraform ≥ 1.9, providers `google` + `google-beta`                                             |
-| Lint / format   | ESLint 9 (flat config) + Prettier                                                               |
+| IaC             | Terraform ≥ 1.9, providers `google` + `google-beta` 8.x                                         |
+| Lint / format   | ESLint 10 (flat config) + Prettier                                                              |
 | Tests           | Vitest (packages, api, web), Jest + `jest-expo` (mobile), Firebase Emulator Suite (intégration) |
 | CI              | GitHub Actions                                                                                  |
 
