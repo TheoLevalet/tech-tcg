@@ -47,7 +47,7 @@ README (T12)
 
 - [x] T1 : Racine du workspace pnpm + Turborepo
 - [x] T2 : Presets partagés `@tech-tcg/config`
-- [ ] T3 : `@tech-tcg/shared` avec `cardSchema` et `healthResponseSchema`
+- [x] T3 : `@tech-tcg/shared` avec `cardSchema` et `healthResponseSchema`
 - [ ] T4 : `@tech-tcg/engine` avec `draw()`
 
 ### Checkpoint 1 : Fondations
