@@ -20,15 +20,15 @@ Contrainte transverse : **coût minimal**. Rester dans les quotas gratuits Fireb
 
 ## Carte des modules
 
-| Module id | Chemin | Responsabilité | Dépend de |
-|---|---|---|---|
-| `config` | `packages/config` | Presets partagés : tsconfig, ESLint, Prettier | — |
-| `shared` | `packages/shared` | Types et schémas Zod partagés (DTO API, modèles Firestore) | `config` |
-| `engine` | `packages/engine` | Règles du TCG, pur TS, sans I/O, déterministe | `config`, `shared` |
-| `api` | `apps/api` | Fastify sur Cloud Functions, Firestore, vérif. tokens Firebase Auth | `shared`, `engine` |
-| `web` | `apps/web` | SPA Vite + React, Firebase Hosting | `shared`, `engine` |
-| `mobile` | `apps/mobile` | Expo (React Native) | `shared`, `engine` |
-| `infra` | `infra/terraform` | Projet Firebase, Firestore, Auth, Hosting, budget | — |
+| Module id | Chemin            | Responsabilité                                                      | Dépend de          |
+| --------- | ----------------- | ------------------------------------------------------------------- | ------------------ |
+| `config`  | `packages/config` | Presets partagés : tsconfig, ESLint, Prettier                       | —                  |
+| `shared`  | `packages/shared` | Types et schémas Zod partagés (DTO API, modèles Firestore)          | `config`           |
+| `engine`  | `packages/engine` | Règles du TCG, pur TS, sans I/O, déterministe                       | `config`, `shared` |
+| `api`     | `apps/api`        | Fastify sur Cloud Functions, Firestore, vérif. tokens Firebase Auth | `shared`, `engine` |
+| `web`     | `apps/web`        | SPA Vite + React, Firebase Hosting                                  | `shared`, `engine` |
+| `mobile`  | `apps/mobile`     | Expo (React Native)                                                 | `shared`, `engine` |
+| `infra`   | `infra/terraform` | Projet Firebase, Firestore, Auth, Hosting, budget                   | —                  |
 
 Ordre de construction : `config` → `shared` → `engine` → `api`, `web`, `mobile` (parallélisables) ; `infra` indépendant.
 
@@ -36,21 +36,21 @@ Règle : les dépendances vont uniquement vers le bas. `engine` et `shared` n'im
 
 ## Tech Stack
 
-| Domaine | Choix |
-|---|---|
-| Package manager | pnpm 10 (workspaces), `packageManager` épinglé dans `package.json` |
-| Orchestration | Turborepo 2 |
-| Langage | TypeScript 5.x, `strict: true`, ESM partout |
-| Front web | Vite + React 19 + React Router |
-| Mobile | Expo SDK (dernière stable) + Expo Router |
-| API | Fastify 5 dans `firebase-functions` v2 `onRequest` |
-| Validation | Zod |
-| Données | Firestore (`firebase-admin` côté API, SDK client côté web/mobile) |
-| Auth | Firebase Auth |
-| IaC | Terraform ≥ 1.9, providers `google` + `google-beta` |
-| Lint / format | ESLint 9 (flat config) + Prettier |
-| Tests | Vitest (packages, api, web), Jest + `jest-expo` (mobile), Firebase Emulator Suite (intégration) |
-| CI | GitHub Actions |
+| Domaine         | Choix                                                                                           |
+| --------------- | ----------------------------------------------------------------------------------------------- |
+| Package manager | pnpm 12 (workspaces), `packageManager` épinglé dans `package.json`                              |
+| Orchestration   | Turborepo 2                                                                                     |
+| Langage         | TypeScript 6.0 (typescript-eslint ne supporte pas encore la 7), `strict: true`, ESM partout     |
+| Front web       | Vite 8 + React 19.3 + React Router                                                              |
+| Mobile          | Expo SDK 58 (impose la version de React du monorepo) + Expo Router                              |
+| API             | Fastify 5 dans `firebase-functions` v2 `onRequest`                                              |
+| Validation      | Zod                                                                                             |
+| Données         | Firestore (`firebase-admin` côté API, SDK client côté web/mobile)                               |
+| Auth            | Firebase Auth                                                                                   |
+| IaC             | Terraform ≥ 1.9, providers `google` + `google-beta` 8.x                                         |
+| Lint / format   | ESLint 10 (flat config) + Prettier                                                              |
+| Tests           | Vitest (packages, api, web), Jest + `jest-expo` (mobile), Firebase Emulator Suite (intégration) |
+| CI              | GitHub Actions                                                                                  |
 
 ## Commands
 
@@ -158,32 +158,35 @@ export function draw(deck: readonly Card[], hand: readonly Card[], count: number
 
 ## Testing Strategy
 
-| Niveau | Où | Outil | Cible |
-|---|---|---|---|
-| Unitaire | `packages/engine/test`, `packages/shared/test` | Vitest | Couverture engine ≥ 90 % |
-| API | `apps/api/test` | Vitest + `fastify.inject()` | Chaque route : cas nominal + validation |
-| Intégration | `apps/api/test/integration` | Vitest + Firestore/Auth emulators | Lecture/écriture Firestore réelles |
-| Composants web | `apps/web/test` | Vitest + Testing Library | Composants avec logique |
-| Mobile | `apps/mobile` | Jest + `jest-expo` | Smoke test de rendu |
-| Infra | `infra/terraform` | `terraform fmt -check`, `terraform validate` | CI |
+| Niveau         | Où                                             | Outil                                        | Cible                                   |
+| -------------- | ---------------------------------------------- | -------------------------------------------- | --------------------------------------- |
+| Unitaire       | `packages/engine/test`, `packages/shared/test` | Vitest                                       | Couverture engine ≥ 90 %                |
+| API            | `apps/api/test`                                | Vitest + `fastify.inject()`                  | Chaque route : cas nominal + validation |
+| Intégration    | `apps/api/test/integration`                    | Vitest + Firestore/Auth emulators            | Lecture/écriture Firestore réelles      |
+| Composants web | `apps/web/test`                                | Vitest + Testing Library                     | Composants avec logique                 |
+| Mobile         | `apps/mobile`                                  | Jest + `jest-expo`                           | Smoke test de rendu                     |
+| Infra          | `infra/terraform`                              | `terraform fmt -check`, `terraform validate` | CI                                      |
 
 Aucun test ne touche un vrai projet Firebase ; tout passe par les emulators.
 
 ## Boundaries
 
 **Toujours**
+
 - `pnpm lint && pnpm typecheck && pnpm test` verts avant chaque commit.
 - Valider toute entrée externe avec Zod.
 - Garder `engine` et `shared` sans dépendance Firebase ni I/O.
 - Ressources cloud en scale-to-zero, dans le free tier.
 
 **Demander d'abord**
+
 - Ajouter une dépendance (hors stack listée ci-dessus).
 - `terraform apply`, toute commande `firebase deploy`.
 - Activer une API GCP ou une ressource potentiellement facturée.
 - Modifier la CI, les presets de `packages/config`, ou le schéma des collections Firestore.
 
 **Jamais**
+
 - Committer secrets, clés de service account, `.env`, `terraform.tfstate`.
 - Désactiver une règle lint / un test pour passer au vert sans accord.
 - Importer une app depuis un package.

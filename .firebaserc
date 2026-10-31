@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "demo-tech-tcg",
+    "dev": "tech-tcg-dev"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "tech-tcg",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.11.2",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "emulators": "firebase emulators:start"
+  },
+  "devDependencies": {
+    "@tech-tcg/config": "workspace:*",
+    "eslint": "10.13.0",
+    "firebase-functions": "7.4.0",
+    "firebase-tools": "15.34.2",
+    "prettier": "3.9.10",
+    "turbo": "2.11.10",
+    "typescript": "6.0.3"
+  }
+}
