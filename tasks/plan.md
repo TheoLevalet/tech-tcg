@@ -82,17 +82,35 @@ README (T12)
 - [ ] CI verte sur la PR d'init
 - [ ] Prêt pour revue
 
+### Phase 4 : Déploiement continu Hosting
+
+Branche `feat/deploy-hosting`, PR empilée sur `chore/init-monorepo` (rebasculée sur `main` après merge de la #1).
+
+- [ ] T13 : Terraform : fédération d'identité GitHub et compte `github-deployer`
+- [ ] T14 : `terraform apply` de T13 (accordé avec ce plan)
+- [ ] T15 : Environnement GitHub `dev` et ses variables
+- [ ] T16 : Workflow `deploy-hosting.yml`
+- [ ] T17 : README
+
+### Checkpoint 4 : Déploiement
+
+- [ ] CI verte sur la PR
+- [ ] Après merge sur `main` : déploiement vert, `https://tech-tcg-dev.web.app` sert le web
+
 ## Risques et mitigations
 
-| Risque                                                           | Impact | Mitigation                                                                                                |
-| ---------------------------------------------------------------- | ------ | --------------------------------------------------------------------------------------------------------- |
-| Fastify dans `onRequest` : le body est déjà parsé par Functions  | Moyen  | Passer `req.rawBody` / désactiver le parser JSON de Fastify dans l'adaptateur ; test POST dans T6         |
-| `firebase deploy` ne résout pas `workspace:*`                    | Haut   | Bundle tsup + `package.json` généré (T6), vérifié par `firebase emulators` sur `dist/`                    |
-| Expo + pnpm (symlinks, Metro)                                    | Moyen  | Expo SDK récent gère les installs isolées ; repli `node-linker=hoisted` limité au besoin, à valider en T8 |
-| Expo épingle ses propres versions de React/TS                    | Moyen  | `pnpm.overrides` ou versions alignées sur celles d'Expo pour tout le monorepo                             |
-| Terraform Firebase nécessite `google-beta` et un billing account | Moyen  | Variables `billing_account` / `org_id` ; `plan` uniquement, `apply` sur accord                            |
-| Firebase Auth via Terraform passe par Identity Platform          | Bas    | Rester sous 50k MAU (free tier) ; documenté dans le module                                                |
-| Facturation surprise                                             | Haut   | Budget + alerte dès T10, `minInstances: 0`, `maxInstances` bas                                            |
+| Risque                                                            | Impact | Mitigation                                                                                                          |
+| ----------------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------- |
+| Fastify dans `onRequest` : le body est déjà parsé par Functions   | Moyen  | Passer `req.rawBody` / désactiver le parser JSON de Fastify dans l'adaptateur ; test POST dans T6                   |
+| `firebase deploy` ne résout pas `workspace:*`                     | Haut   | Bundle tsup + `package.json` généré (T6), vérifié par `firebase emulators` sur `dist/`                              |
+| Expo + pnpm (symlinks, Metro)                                     | Moyen  | Expo SDK récent gère les installs isolées ; repli `node-linker=hoisted` limité au besoin, à valider en T8           |
+| Expo épingle ses propres versions de React/TS                     | Moyen  | `pnpm.overrides` ou versions alignées sur celles d'Expo pour tout le monorepo                                       |
+| Terraform Firebase nécessite `google-beta` et un billing account  | Moyen  | Variables `billing_account` / `org_id` ; `plan` uniquement, `apply` sur accord                                      |
+| Firebase Auth via Terraform passe par Identity Platform           | Bas    | Rester sous 50k MAU (free tier) ; documenté dans le module                                                          |
+| Rewrite `/api/**` vers une function non déployée                  | Bas    | Le CLI émet un avertissement sans échouer ; la page affiche « API : injoignable » tant que l'API n'est pas déployée |
+| Droits IAM insuffisants pour `firebase deploy`                    | Moyen  | Rôles ajustés au premier échec, sans élargir au-delà de Hosting                                                     |
+| Workflow non testable avant merge (environnement limité à `main`) | Moyen  | `actionlint` en local ; premier run réel au merge, corrigé dans une PR de suivi si besoin                           |
+| Facturation surprise                                              | Haut   | Budget + alerte dès T10, `minInstances: 0`, `maxInstances` bas                                                      |
 
 ## Parallélisation
 
