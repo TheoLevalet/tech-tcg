@@ -28,11 +28,11 @@ Chaque tâche : tests écrits avant le code quand il y a un comportement, puis `
 - [x] C3 : `AuthProvider`, `ApiProvider` et gardes de route
 - [x] C4 : Pages connexion, inscription, mot de passe oublié, accueil
 - [x] C5 : Vérification navigateur sur les emulators
-- [ ] Checkpoint C : merge, déploiement vert, inscription et connexion sur le site en ligne
+- [x] Checkpoint C : merge, déploiement vert, inscription et connexion sur le site en ligne
 
 ## Phase D : auth-mobile ([spec](../SPEC-auth-mobile.md))
 
-- [ ] D1 : Config Firebase mobile (persistance, emulators, variables)
+- [x] D1 : Config Firebase mobile (persistance, emulators, variables)
 - [ ] D2 : `AuthProvider` mobile
 - [ ] D3 : Écrans `(auth)` et `(app)`
 - [ ] D4 : Vérification dans le simulateur iOS

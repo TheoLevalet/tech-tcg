@@ -2,7 +2,11 @@
   "extends": "@tech-tcg/config/tsconfig.base.json",
   "compilerOptions": {
     "jsx": "react-jsx",
-    "types": ["jest"]
+    "types": ["jest"],
+    // Types de la version React Native, que les exports du paquet ne désignent pas.
+    "paths": {
+      "@firebase/auth": ["./node_modules/@firebase/auth/dist/rn/index.rn.d.ts"]
+    }
   },
   "include": ["app", "src", "test", "expo-env.d.ts"]
 }
