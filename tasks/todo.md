@@ -10,7 +10,7 @@ Chaque tâche : tests écrits avant le code quand il y a un comportement, puis `
 - [x] A2 : Options de la fonction (`serviceAccount`, `invoker`) — vérif : build, emulator Functions
 - [x] A3 : Workflow `deploy.yml` (hosting + functions) — vérif : `actionlint`
 - [x] A4 : README et SPEC.md
-- [ ] Checkpoint A : merge, run « Deploy » vert, `/api/health` = 200 en ligne
+- [x] Checkpoint A : merge, run « Deploy » vert, `/api/health` = 200 en ligne
 
 ## Phase B : auth-core ([spec](../SPEC-auth-core.md))
 

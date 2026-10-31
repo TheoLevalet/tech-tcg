@@ -86,7 +86,9 @@ export const api = onRequest(
 3. `gcloud functions describe api --region europe-west1` montre `api-runtime` comme compte d'exécution.
 4. `terraform plan` sans changement après `apply`.
 
-## Open Questions
+## Droits retenus
 
-1. Rôles exacts de `github-deployer` pour déployer une fonction 2nd gen : base prévue `cloudfunctions.developer`, `run.admin` (rendre la fonction publique), `iam.serviceAccountUser` sur `api-runtime`. À ajuster au premier run si une erreur `403` apparaît.
-2. Cloud Build : dans les projets récents, il construit avec le compte par défaut de Compute Engine, qui n'a plus de rôle. Prévu : lui accorder `roles/cloudbuild.builds.builder`, ou un compte de build dédié si l'organisation l'impose.
+Ajustés au premier déploiement réel :
+
+- `github-deployer` : `cloudfunctions.admin` (seul rôle Cloud Functions qui permet de rendre une fonction publique), `run.admin`, `firebasehosting.admin`, `serviceusage.serviceUsageConsumer` ; `iam.serviceAccountUser` sur `api-runtime`, sur le compte de build par défaut et sur `tech-tcg-dev@appspot.gserviceaccount.com` (vérifié par le CLI Firebase).
+- APIs activées en plus : `cloudbilling` et `firebaseextensions`, que le CLI Firebase vérifie à chaque déploiement de functions.
