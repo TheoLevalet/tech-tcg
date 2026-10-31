@@ -87,9 +87,9 @@ README (T12)
 Branche `feat/deploy-hosting`, PR empilée sur `chore/init-monorepo` (rebasculée sur `main` après merge de la #1).
 
 - [x] T13 : Terraform : fédération d'identité GitHub et compte `github-deployer`
-- [ ] T14 : `terraform apply` de T13 (accordé avec ce plan)
-- [ ] T15 : Environnement GitHub `dev` et ses variables
-- [ ] T16 : Workflow `deploy-hosting.yml`
+- [x] T14 : `terraform apply` de T13 (accordé avec ce plan)
+- [x] T15 : Environnement GitHub `dev` et ses variables
+- [x] T16 : Workflow `deploy-hosting.yml`
 - [ ] T17 : README
 
 ### Checkpoint 4 : Déploiement
