@@ -53,6 +53,10 @@ export const firebaseOptions = {
   appId: env.appId,
 };
 
-export const apiUrl = useEmulators
-  ? `http://${emulatorHost}:5001/${env.projectId}/europe-west1/api`
-  : env.apiUrl;
+function resolveApiUrl(): string {
+  if (useEmulators) return `http://${emulatorHost}:5001/${env.projectId}/europe-west1/api`;
+  if (!env.apiUrl) throw new Error("EXPO_PUBLIC_API_URL manquante");
+  return env.apiUrl;
+}
+
+export const apiUrl = resolveApiUrl();

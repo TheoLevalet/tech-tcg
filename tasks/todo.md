@@ -34,6 +34,6 @@ Chaque tâche : tests écrits avant le code quand il y a un comportement, puis `
 
 - [x] D1 : Config Firebase mobile (persistance, emulators, variables)
 - [x] D2 : `AuthProvider` mobile
-- [ ] D3 : Écrans `(auth)` et `(app)`
+- [x] D3 : Écrans `(auth)` et `(app)`
 - [ ] D4 : Vérification dans le simulateur iOS
 - [ ] Checkpoint D : merge
