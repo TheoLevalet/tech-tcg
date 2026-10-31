@@ -42,3 +42,24 @@ jobs:
       - run: terraform fmt -check -recursive infra/terraform
       - run: terraform -chdir=infra/terraform/envs/dev init -backend=false
       - run: terraform -chdir=infra/terraform/envs/dev validate
+
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: actions/cache@v6
+        with:
+          path: ~/.cache/firebase/emulators
+          key: firebase-emulators-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: firebase-emulators-${{ runner.os }}-
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec firebase emulators:exec --only auth,firestore --project demo-tech-tcg "pnpm --filter @tech-tcg/api test:integration"
