@@ -25,7 +25,7 @@ Chaque tâche : tests écrits avant le code quand il y a un comportement, puis `
 
 - [x] C1 : Config Firebase web (Terraform, variables GitHub, `firebase.ts`)
 - [x] C2 : Messages d'erreur Firebase en français dans `shared`
-- [ ] C3 : `AuthProvider`, `ApiProvider` et gardes de route
+- [x] C3 : `AuthProvider`, `ApiProvider` et gardes de route
 - [ ] C4 : Pages connexion, inscription, mot de passe oublié, accueil
 - [ ] C5 : Vérification navigateur sur les emulators
 - [ ] Checkpoint C : merge, déploiement vert, inscription et connexion sur le site en ligne
