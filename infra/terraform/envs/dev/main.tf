@@ -39,7 +39,7 @@ module "github_deploy" {
   project_id           = module.firebase.project_id
   github_repository_id = "1438514464"
   roles = [
-    "roles/cloudfunctions.developer",
+    "roles/cloudfunctions.admin",
     "roles/firebasehosting.admin",
     "roles/run.admin",
     "roles/serviceusage.serviceUsageConsumer",

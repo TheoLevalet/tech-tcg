@@ -57,3 +57,10 @@ resource "google_service_account_iam_member" "deployer_build" {
   role               = "roles/iam.serviceAccountUser"
   member             = "serviceAccount:${var.deployer_service_account}"
 }
+
+# Vérifié par le CLI Firebase avant tout déploiement de functions.
+resource "google_service_account_iam_member" "deployer_appspot" {
+  service_account_id = "projects/${var.project_id}/serviceAccounts/${var.project_id}@appspot.gserviceaccount.com"
+  role               = "roles/iam.serviceAccountUser"
+  member             = "serviceAccount:${var.deployer_service_account}"
+}

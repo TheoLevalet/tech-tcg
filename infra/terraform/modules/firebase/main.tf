@@ -18,10 +18,12 @@ resource "google_project_service" "this" {
   for_each = toset([
     "artifactregistry.googleapis.com",
     "billingbudgets.googleapis.com",
+    "cloudbilling.googleapis.com",
     "cloudbuild.googleapis.com",
     "cloudfunctions.googleapis.com",
     "eventarc.googleapis.com",
     "firebase.googleapis.com",
+    "firebaseextensions.googleapis.com",
     "firebasehosting.googleapis.com",
     "firebaserules.googleapis.com",
     "firestore.googleapis.com",
