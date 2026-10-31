@@ -8,7 +8,7 @@ Chaque tâche : tests écrits avant le code quand il y a un comportement, puis `
 
 - [x] A1 : Module Terraform `api-runtime` et rôles de déploiement — vérif : `plan` relu, `apply`, `plan` sans changement
 - [x] A2 : Options de la fonction (`serviceAccount`, `invoker`) — vérif : build, emulator Functions
-- [ ] A3 : Workflow `deploy.yml` (hosting + functions) — vérif : `actionlint`
+- [x] A3 : Workflow `deploy.yml` (hosting + functions) — vérif : `actionlint`
 - [ ] A4 : README et SPEC.md
 - [ ] Checkpoint A : merge, run « Deploy » vert, `/api/health` = 200 en ligne
 
