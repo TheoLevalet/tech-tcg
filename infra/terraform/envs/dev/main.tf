@@ -69,3 +69,7 @@ output "github_workload_identity_provider" {
 output "github_service_account" {
   value = module.github_deploy.service_account
 }
+
+output "firebase_web_config" {
+  value = module.firebase.web_config
+}

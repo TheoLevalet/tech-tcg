@@ -40,7 +40,7 @@ VITE_FIREBASE_APP_ID
 VITE_USE_EMULATORS        # "true" en local : Auth sur 127.0.0.1:9099
 ```
 
-En local, `.env.development` versionné pointe vers le projet `demo-tech-tcg` et les emulators. En CI, les valeurs de `tech-tcg-dev` (publiques par conception) sont des variables de l'environnement GitHub `dev`, issues de Terraform.
+En développement (`vite dev`), `firebase.ts` prend par défaut le projet `demo-tech-tcg` et les emulators ; aucun fichier `.env` n'est versionné. En CI, les valeurs de `tech-tcg-dev` (publiques par conception) sont des variables de l'environnement GitHub `dev`, issues de Terraform.
 
 ## Commands
 
@@ -60,7 +60,6 @@ apps/web/src/auth/RequireAuth.tsx      → garde de route
 apps/web/src/auth/errors.ts            → codes Firebase → messages français
 apps/web/src/pages/                    → Connexion, Inscription, MotDePasseOublie, Accueil
 apps/web/test/                         → tests par page et par garde
-.env.development                       → config demo + emulators
 ```
 
 ## Code Style

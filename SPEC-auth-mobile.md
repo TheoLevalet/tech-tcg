@@ -54,7 +54,7 @@ apps/mobile/app/(app)/                  → accueil, _layout (redirige si non co
 apps/mobile/test/                       → tests des écrans
 ```
 
-La correspondance code Firebase → message français est déplacée du web vers `shared` pour être commune aux deux apps.
+La correspondance code Firebase → message français est dans `shared` (`authErrorMessage`), commune aux deux apps.
 
 ## Code Style
 
