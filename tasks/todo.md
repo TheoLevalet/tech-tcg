@@ -24,7 +24,7 @@ Chaque tâche : tests écrits avant le code quand il y a un comportement, puis `
 ## Phase C : auth-web ([spec](../SPEC-auth-web.md))
 
 - [x] C1 : Config Firebase web (Terraform, variables GitHub, `firebase.ts`)
-- [ ] C2 : Messages d'erreur Firebase en français dans `shared`
+- [x] C2 : Messages d'erreur Firebase en français dans `shared`
 - [ ] C3 : `AuthProvider`, `ApiProvider` et gardes de route
 - [ ] C4 : Pages connexion, inscription, mot de passe oublié, accueil
 - [ ] C5 : Vérification navigateur sur les emulators
