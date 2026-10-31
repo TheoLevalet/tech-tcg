@@ -1,5 +1,5 @@
 resource "google_project" "this" {
-  provider = google-beta
+  provider = google-beta.no_user_project_override
 
   project_id      = var.project_id
   name            = var.project_name
@@ -14,7 +14,7 @@ resource "google_project" "this" {
 }
 
 resource "google_project_service" "this" {
-  provider = google-beta
+  provider = google-beta.no_user_project_override
   for_each = toset([
     "artifactregistry.googleapis.com",
     "billingbudgets.googleapis.com",

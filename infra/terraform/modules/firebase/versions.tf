@@ -9,6 +9,8 @@ terraform {
     google-beta = {
       source  = "hashicorp/google-beta"
       version = "~> 8.9"
+
+      configuration_aliases = [google-beta.no_user_project_override]
     }
   }
 }
