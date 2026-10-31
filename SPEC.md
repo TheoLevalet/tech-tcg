@@ -16,7 +16,7 @@ Contrainte transverse : **coût minimal**. Rester dans les quotas gratuits Fireb
 4. API Fastify déployée comme **une seule** Cloud Function 2nd gen HTTP (`onRequest`), `minInstances: 0`.
 5. Région `europe-west1`.
 6. Un seul environnement au démarrage (`dev`) ; `prod` ajouté plus tard via workspace / dossier Terraform dédié.
-7. GitHub Actions pour la CI (lint, typecheck, test, build). Pas de déploiement automatique au démarrage.
+7. GitHub Actions pour la CI (lint, typecheck, test, build) et le déploiement continu du web sur Firebase Hosting (voir « Déploiement continu »).
 
 ## Carte des modules
 
@@ -201,6 +201,22 @@ Aucun test ne touche un vrai projet Firebase ; tout passe par les emulators.
 5. `terraform validate` passe sur `envs/dev` ; le plan crée projet Firebase, Firestore (mode natif), Auth, site Hosting, alerte budget.
 6. Turbo met en cache `build`, `lint`, `test` (2e exécution « FULL TURBO »).
 7. CI GitHub Actions verte sur la PR d'init.
+
+## Déploiement continu
+
+Périmètre : **Firebase Hosting uniquement** (`apps/web`). Functions, règles Firestore et mobile hors périmètre.
+
+- Déclencheur : push sur `main` et `workflow_dispatch`, environnement GitHub `dev` limité à `main`.
+- Authentification : Workload Identity Federation, sans clé de compte de service. Le pool n'accepte que le repo `TheoLevalet/tech-tcg` (par identifiant de repo) et la ref `refs/heads/main`.
+- Compte de service `github-deployer` aux droits minimaux pour `firebase deploy --only hosting`.
+- Variables GitHub (non secrètes) dans l'environnement `dev` : `GCP_PROJECT_ID`, `GCP_WORKLOAD_IDENTITY_PROVIDER`, `GCP_SERVICE_ACCOUNT`.
+- Ressources GCP gérées par Terraform, state dans `gs://tech-tcg-dev-tfstate`. `terraform apply` reste manuel.
+
+Critères de succès :
+
+1. Un push sur `main` déploie `apps/web/dist` sur `https://tech-tcg-dev.web.app`.
+2. Aucun secret GitHub n'est nécessaire.
+3. Un workflow lancé depuis une autre branche ou un fork ne peut pas obtenir de jeton GCP.
 
 ## Open Questions
 

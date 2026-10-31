@@ -271,3 +271,98 @@ Spec : [SPEC.md](../SPEC.md) · Plan : [plan.md](plan.md)
 - [ ] Les 7 critères de succès de SPEC.md remplis
 - [ ] CI verte sur la PR d'init
 - [ ] Revue humaine
+
+## Phase 4 : Déploiement continu Hosting
+
+## T13 : Terraform : fédération d'identité GitHub et compte `github-deployer`
+
+**Description :** Module `modules/github-deploy` : pool et provider OIDC GitHub, condition sur l'identifiant du repo (`1438514464`) et `refs/heads/main`, compte de service `github-deployer`, rôles minimaux pour déployer Hosting, liaison `workloadIdentityUser`. Instancié dans `envs/dev`, sorties pour les variables GitHub.
+
+**Critères d'acceptation :**
+
+- [ ] `terraform validate` et `fmt -check` passent
+- [ ] `terraform plan` n'ajoute que les ressources de ce module, sans changer l'existant
+- [ ] Aucune clé de compte de service créée
+
+**Vérification :**
+
+- [ ] `terraform -chdir=infra/terraform/envs/dev plan`
+
+**Dépendances :** T10
+
+**Fichiers :** `infra/terraform/modules/github-deploy/{main,variables,outputs,versions}.tf`, `infra/terraform/envs/dev/main.tf`
+
+**Taille :** M
+
+## T14 : `terraform apply` de T13
+
+**Description :** Appliquer le plan de T13 sur `tech-tcg-dev`, state dans GCS.
+
+**Critères d'acceptation :**
+
+- [ ] Apply réussi, `plan` suivant sans changement
+
+**Vérification :**
+
+- [ ] `terraform plan` → « No changes »
+
+**Dépendances :** T13
+
+**Taille :** XS
+
+## T15 : Environnement GitHub `dev` et ses variables
+
+**Description :** Créer l'environnement `dev` limité à la branche `main` et y définir les trois variables à partir des sorties Terraform.
+
+**Critères d'acceptation :**
+
+- [ ] `gh api repos/TheoLevalet/tech-tcg/environments/dev` montre la politique de branche `main`
+- [ ] Les trois variables existent, aucun secret
+
+**Vérification :**
+
+- [ ] `gh variable list --env dev`
+
+**Dépendances :** T14
+
+**Taille :** XS
+
+## T16 : Workflow `deploy-hosting.yml`
+
+**Description :** Sur push `main` et `workflow_dispatch` : install, build de `@tech-tcg/web`, authentification `google-github-actions/auth`, `firebase deploy --only hosting --project dev --non-interactive`.
+
+**Critères d'acceptation :**
+
+- [ ] `actionlint` sans erreur
+- [ ] Permissions minimales (`contents: read`, `id-token: write`)
+- [ ] Environnement `dev`, concurrence sans annulation d'un déploiement en cours
+
+**Vérification :**
+
+- [ ] `actionlint .github/workflows/deploy-hosting.yml`
+- [ ] Après merge : run vert et site en ligne
+
+**Dépendances :** T15
+
+**Fichiers :** `.github/workflows/deploy-hosting.yml`
+
+**Taille :** S
+
+## T17 : README
+
+**Description :** Section déploiement : déclencheur, authentification, variables, procédure pour ajouter des droits.
+
+**Critères d'acceptation :**
+
+- [ ] Le README explique comment le web est déployé et où regarder en cas d'échec
+
+**Dépendances :** T16
+
+**Fichiers :** `README.md`
+
+**Taille :** XS
+
+## Checkpoint 4 : Déploiement
+
+- [ ] CI verte sur la PR
+- [ ] Après merge sur `main` : déploiement vert, site en ligne
