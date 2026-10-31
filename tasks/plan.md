@@ -90,7 +90,7 @@ Branche `feat/deploy-hosting`, PR empilée sur `chore/init-monorepo` (rebasculé
 - [x] T14 : `terraform apply` de T13 (accordé avec ce plan)
 - [x] T15 : Environnement GitHub `dev` et ses variables
 - [x] T16 : Workflow `deploy-hosting.yml`
-- [ ] T17 : README
+- [x] T17 : README
 
 ### Checkpoint 4 : Déploiement
 
