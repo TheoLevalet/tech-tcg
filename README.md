@@ -75,8 +75,8 @@ pnpm --filter @tech-tcg/engine test -- --coverage
 Premier déploiement de `infra/terraform/envs/dev` :
 
 1. Copier `terraform.tfvars.example` en `terraform.tfvars` et renseigner le compte de facturation.
-2. Commenter le bloc `backend "gcs"` de `backend.tf`, puis `terraform init` et `terraform apply` avec un state local.
-3. Rétablir le bloc, copier `backend.hcl.example` en `backend.hcl`, puis `terraform init -backend-config=backend.hcl -migrate-state`.
+2. Créer `backend_override.tf` contenant `terraform { backend "local" {} }`, puis `terraform init` et `terraform apply` avec un state local.
+3. Supprimer `backend_override.tf`, copier `backend.hcl.example` en `backend.hcl`, puis `terraform init -backend-config=backend.hcl -migrate-state`.
 
 Ensuite :
 

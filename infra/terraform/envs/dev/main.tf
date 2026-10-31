@@ -27,7 +27,7 @@ module "firebase" {
   }
 
   project_id      = var.project_id
-  project_name    = "Tech TCG (dev)"
+  project_name    = "Tech TCG dev"
   billing_account = var.billing_account
   org_id          = var.org_id
   folder_id       = var.folder_id
