@@ -33,10 +33,31 @@ module "firebase" {
   folder_id       = var.folder_id
 }
 
+module "github_deploy" {
+  source = "../../modules/github-deploy"
+
+  project_id           = module.firebase.project_id
+  github_repository_id = "1438514464"
+  roles = [
+    "roles/cloudfunctions.viewer",
+    "roles/firebasehosting.admin",
+    "roles/run.viewer",
+    "roles/serviceusage.serviceUsageConsumer",
+  ]
+}
+
 output "project_id" {
   value = module.firebase.project_id
 }
 
 output "state_bucket" {
   value = module.firebase.state_bucket
+}
+
+output "github_workload_identity_provider" {
+  value = module.github_deploy.workload_identity_provider
+}
+
+output "github_service_account" {
+  value = module.github_deploy.service_account
 }
