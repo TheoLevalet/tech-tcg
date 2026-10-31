@@ -7,7 +7,13 @@ const handler = toRequestHandler(
 );
 
 export const api = onRequest(
-  { region: "europe-west1", minInstances: 0, maxInstances: 2 },
+  {
+    region: "europe-west1",
+    minInstances: 0,
+    maxInstances: 2,
+    serviceAccount: "api-runtime@",
+    invoker: "public",
+  },
   async (req, res) => {
     (await handler)(req, res);
   },

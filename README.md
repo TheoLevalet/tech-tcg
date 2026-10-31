@@ -72,13 +72,12 @@ pnpm --filter @tech-tcg/engine test -- --coverage
 
 ## Déploiement continu
 
-Le web (`apps/web`) est déployé sur Firebase Hosting à chaque push sur `main` par `.github/workflows/deploy-hosting.yml`, ou à la demande depuis l'onglet Actions. Site : https://tech-tcg-dev.web.app.
+Le web (`apps/web`) et l'API (`apps/api`) sont déployés sur Firebase Hosting et Cloud Functions à chaque push sur `main` par `.github/workflows/deploy.yml`, ou à la demande depuis l'onglet Actions. Site : https://tech-tcg-dev.web.app, API : https://tech-tcg-dev.web.app/api.
 
 - **Authentification** : fédération d'identité GCP, sans clé ni secret. Seuls ce repo et la ref `refs/heads/main` obtiennent un jeton, qui sert à agir en tant que `github-deployer@tech-tcg-dev.iam.gserviceaccount.com`.
 - **Variables** : environnement GitHub `dev` (limité à `main`) avec `GCP_PROJECT_ID`, `GCP_WORKLOAD_IDENTITY_PROVIDER` et `GCP_SERVICE_ACCOUNT`, issues des sorties Terraform.
-- **Droits** : liste `roles` du module `github_deploy` dans `infra/terraform/envs/dev/main.tf`. En cas d'erreur `403` dans les logs du workflow, ajouter le rôle manquant puis `terraform apply`.
-
-L'API n'est pas encore déployée : `/api/**` ne répond pas sur le site.
+- **Droits** : liste `roles` du module `github_deploy` dans `infra/terraform/envs/dev/main.tf`, plus le module `api_runtime` (compte d'exécution `api-runtime`, droits de build, dépôt d'images avec nettoyage automatique). En cas d'erreur `403` dans les logs du workflow, ajouter le rôle manquant puis `terraform apply`.
+- **Jamais `--force`** : `firebase deploy --force` supprime sans confirmation les fonctions absentes du code.
 
 ## Infrastructure
 

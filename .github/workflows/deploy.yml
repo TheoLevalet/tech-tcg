@@ -1,4 +1,4 @@
-name: Deploy Hosting
+name: Deploy
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: deploy-hosting-dev
+  group: deploy-dev
   cancel-in-progress: false
 
 permissions:
@@ -27,11 +27,11 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm turbo run build --filter=@tech-tcg/web
+      - run: pnpm turbo run build --filter=@tech-tcg/web --filter=@tech-tcg/api
       - uses: google-github-actions/auth@v3
         with:
           workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ vars.GCP_SERVICE_ACCOUNT }}
-      - run: pnpm exec firebase deploy --only hosting --project "$GCP_PROJECT_ID" --non-interactive
+      - run: pnpm exec firebase deploy --only hosting,functions --project "$GCP_PROJECT_ID" --non-interactive
         env:
           GCP_PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}

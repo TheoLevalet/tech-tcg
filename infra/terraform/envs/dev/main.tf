@@ -39,11 +39,19 @@ module "github_deploy" {
   project_id           = module.firebase.project_id
   github_repository_id = "1438514464"
   roles = [
-    "roles/cloudfunctions.viewer",
+    "roles/cloudfunctions.developer",
     "roles/firebasehosting.admin",
-    "roles/run.viewer",
+    "roles/run.admin",
     "roles/serviceusage.serviceUsageConsumer",
   ]
+}
+
+module "api_runtime" {
+  source = "../../modules/api-runtime"
+
+  project_id               = module.firebase.project_id
+  project_number           = module.firebase.project_number
+  deployer_service_account = module.github_deploy.service_account
 }
 
 output "project_id" {
