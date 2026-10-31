@@ -7,7 +7,7 @@ Chaque tâche : tests écrits avant le code quand il y a un comportement, puis `
 ## Phase A : api-deploy ([spec](../SPEC-api-deploy.md))
 
 - [x] A1 : Module Terraform `api-runtime` et rôles de déploiement — vérif : `plan` relu, `apply`, `plan` sans changement
-- [ ] A2 : Options de la fonction (`serviceAccount`, `invoker`) — vérif : build, emulator Functions
+- [x] A2 : Options de la fonction (`serviceAccount`, `invoker`) — vérif : build, emulator Functions
 - [ ] A3 : Workflow `deploy.yml` (hosting + functions) — vérif : `actionlint`
 - [ ] A4 : README et SPEC.md
 - [ ] Checkpoint A : merge, run « Deploy » vert, `/api/health` = 200 en ligne
