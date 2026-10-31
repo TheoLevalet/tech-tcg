@@ -14,3 +14,10 @@ resource "google_firebase_hosting_site" "web" {
   site_id = google_project.this.project_id
   app_id  = google_firebase_web_app.web.app_id
 }
+
+data "google_firebase_web_app_config" "web" {
+  provider = google-beta
+
+  project    = google_project.this.project_id
+  web_app_id = google_firebase_web_app.web.app_id
+}

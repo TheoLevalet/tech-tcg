@@ -59,7 +59,7 @@ Autonomie accordée : j'applique Terraform, je merge chaque PR quand sa CI est v
 
 - Terraform : `data "google_firebase_web_app_config"` dans `modules/firebase`, sorties `web_api_key`, `web_auth_domain`, `web_app_id` ; `apply` ; `gh variable set --env dev` `FIREBASE_WEB_API_KEY`, `FIREBASE_WEB_AUTH_DOMAIN`, `FIREBASE_WEB_APP_ID`.
 - `deploy.yml` : ces variables + `GCP_PROJECT_ID` passées en `VITE_FIREBASE_*` à l'étape de build.
-- `apps/web/.env.development` versionné (projet `demo-tech-tcg`, `VITE_USE_EMULATORS=true`) ; exception `!apps/web/.env.development` dans `.gitignore`.
+- Pas de `.env` versionné : en développement, `firebase.ts` prend par défaut le projet `demo-tech-tcg` et les emulators.
 - `apps/web/src/firebase.ts` : config validée par Zod (erreur claire si variable manquante), `connectAuthEmulator` si emulators.
 
 **C2. Messages d'erreur** `packages/shared/src/auth-errors.ts` : code Firebase → message français, message générique pour code inconnu, « Email ou mot de passe incorrect » pour `invalid-credential`/`wrong-password`/`user-not-found`. Placé directement dans `shared` (commun avec le mobile) ; ajuster la phrase correspondante de `SPEC-auth-mobile.md`.
@@ -74,7 +74,7 @@ Autonomie accordée : j'applique Terraform, je merge chaque PR quand sa CI est v
 
 ## Phase D : auth-mobile (branche `feat/auth-mobile`)
 
-**D1. Config** : dépendances `firebase` (13.1.0) et `@react-native-async-storage/async-storage@2.2.0` (version d'Expo SDK 58). `apps/mobile/src/firebase.ts` : `initializeAuth` + `getReactNativePersistence(AsyncStorage)`, emulators sur l'hôte de Metro (`Constants.expoConfig.hostUri`). `tsconfig` mobile : `customConditions: ["react-native"]` pour les types de `getReactNativePersistence`. `apps/mobile/.env.development` versionné (demo + emulators) ; URL d'API = emulator Functions en local, `EXPO_PUBLIC_API_URL` sinon.
+**D1. Config** : dépendances `firebase` (13.1.0) et `@react-native-async-storage/async-storage@2.2.0` (version d'Expo SDK 58). `apps/mobile/src/firebase.ts` : `initializeAuth` + `getReactNativePersistence(AsyncStorage)`, emulators sur l'hôte de Metro (`Constants.expoConfig.hostUri`). `tsconfig` mobile : `customConditions: ["react-native"]` pour les types de `getReactNativePersistence`. Valeurs de démonstration par défaut en développement, comme sur le web ; URL d'API = emulator Functions en local, `EXPO_PUBLIC_API_URL` sinon.
 
 **D2. AuthProvider mobile** : même contrat que le web (`src/auth/AuthProvider.tsx`), sans Google ; client d'API de `shared`.
 

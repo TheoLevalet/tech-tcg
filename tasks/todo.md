@@ -19,11 +19,11 @@ Chaque tâche : tests écrits avant le code quand il y a un comportement, puis `
 - [x] B3 : `buildApp` avec dépendances, plugin d'authentification, `GET` et `PUT /me` — vérif : un test par cas du tableau de la spec
 - [x] B4 : Branchement Firebase Admin réel — vérif : build, emulator Functions
 - [x] B5 : Tests d'intégration sur emulators, job CI `integration`
-- [ ] Checkpoint B : merge, déploiement vert, `/api/me` sans jeton = 401 en ligne
+- [x] Checkpoint B : merge, déploiement vert, `/api/me` sans jeton = 401 en ligne
 
 ## Phase C : auth-web ([spec](../SPEC-auth-web.md))
 
-- [ ] C1 : Config Firebase web (Terraform, variables GitHub, `.env.development`, `firebase.ts`)
+- [x] C1 : Config Firebase web (Terraform, variables GitHub, `firebase.ts`)
 - [ ] C2 : Messages d'erreur Firebase en français dans `shared`
 - [ ] C3 : `AuthProvider`, `ApiProvider` et gardes de route
 - [ ] C4 : Pages connexion, inscription, mot de passe oublié, accueil
