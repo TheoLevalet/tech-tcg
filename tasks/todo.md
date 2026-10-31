@@ -16,8 +16,8 @@ Chaque tâche : tests écrits avant le code quand il y a un comportement, puis `
 
 - [x] B1 : Schémas du profil dans `shared` — vérif : tests des schémas
 - [x] B2 : Client d'API dans `shared` — vérif : tests avec `fetch` simulé
-- [ ] B3 : `buildApp` avec dépendances, plugin d'authentification, `GET` et `PUT /me` — vérif : un test par cas du tableau de la spec
-- [ ] B4 : Branchement Firebase Admin réel — vérif : build, emulator Functions
+- [x] B3 : `buildApp` avec dépendances, plugin d'authentification, `GET` et `PUT /me` — vérif : un test par cas du tableau de la spec
+- [x] B4 : Branchement Firebase Admin réel — vérif : build, emulator Functions
 - [ ] B5 : Tests d'intégration sur emulators, job CI `integration`
 - [ ] Checkpoint B : merge, déploiement vert, `/api/me` sans jeton = 401 en ligne
 

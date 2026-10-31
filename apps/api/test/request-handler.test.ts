@@ -2,6 +2,7 @@ import type { AddressInfo } from "node:net";
 import express from "express";
 import { describe, expect, it } from "vitest";
 import { buildApp } from "../src/app.ts";
+import { fakeDependencies } from "./fakes.ts";
 import { stripApiPrefix, toRequestHandler } from "../src/request-handler.ts";
 
 async function serveLikeCloudFunctions(handler: express.RequestHandler) {
@@ -13,7 +14,7 @@ async function serveLikeCloudFunctions(handler: express.RequestHandler) {
 
 describe("toRequestHandler", () => {
   it("sert GET /health derrière un body déjà parsé", async () => {
-    const handler = await toRequestHandler(buildApp());
+    const handler = await toRequestHandler(buildApp(fakeDependencies()));
     const server = await serveLikeCloudFunctions(handler);
     try {
       const response = await fetch(`${server.url}/health`);
@@ -24,7 +25,7 @@ describe("toRequestHandler", () => {
   });
 
   it("transmet un body JSON déjà consommé par Express", async () => {
-    const app = buildApp();
+    const app = buildApp(fakeDependencies());
     app.post("/echo", async (request) => request.body);
     const server = await serveLikeCloudFunctions(await toRequestHandler(app));
     try {

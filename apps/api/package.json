@@ -15,7 +15,8 @@
     "@tech-tcg/shared": "workspace:*",
     "fastify": "5.12.7",
     "firebase-admin": "14.5.0",
-    "firebase-functions": "7.4.0"
+    "firebase-functions": "7.4.0",
+    "zod": "4.6.7"
   },
   "devDependencies": {
     "@tech-tcg/config": "workspace:*",
