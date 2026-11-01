@@ -35,5 +35,5 @@ Chaque tâche : tests écrits avant le code quand il y a un comportement, puis `
 - [x] D1 : Config Firebase mobile (persistance, emulators, variables)
 - [x] D2 : `AuthProvider` mobile
 - [x] D3 : Écrans `(auth)` et `(app)`
-- [ ] D4 : Vérification dans le simulateur iOS — non faite : Xcode absent de la machine ; `expo export --platform ios` et tests verts
-- [ ] Checkpoint D : merge
+- [x] D4 : Vérification dans le simulateur iOS sur les emulators : inscription, déconnexion, connexion, compte sans profil, mot de passe oublié, relance de l'app toujours connecté. Corrigé au passage : emulators injoignables par l'adresse de Metro, correction automatique sur les champs. Reste : vérification contre `tech-tcg-dev`
+- [x] Checkpoint D : merge
