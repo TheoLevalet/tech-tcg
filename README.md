@@ -46,6 +46,7 @@ pnpm dev
 - UI des emulators : http://127.0.0.1:4000
 
 Le projet `demo-tech-tcg` est un projet de démonstration : les emulators n'accèdent à aucun service réel.
+Ils écoutent sur toutes les interfaces : l'app mobile les joint par l'adresse de Metro, depuis le simulateur iOS ou un téléphone du réseau local.
 
 Mobile :
 

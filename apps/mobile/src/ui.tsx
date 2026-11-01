@@ -59,6 +59,7 @@ export function Field({ label, ...input }: { label: string } & TextInputProps) {
       <TextInput
         accessibilityLabel={label}
         autoCapitalize="none"
+        autoCorrect={false}
         placeholderTextColor={palette.muted}
         style={[styles.input, { color: palette.text, borderColor: palette.border }]}
         {...input}
